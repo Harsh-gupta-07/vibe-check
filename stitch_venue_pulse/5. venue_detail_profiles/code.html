@@ -1,0 +1,264 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Venue Details - Vibe Check</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;800&amp;family=Inter:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    </style>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb4aa",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#313030",
+                        "secondary-fixed": "#6ff6ff",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-secondary": "#00373a",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#d4c0d7",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#353534",
+                        "on-tertiary-fixed": "#410001",
+                        "surface-dim": "#131313",
+                        "secondary-fixed-dim": "#00dce6",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container": "#201f1f",
+                        "on-error": "#690005",
+                        "on-primary": "#520072",
+                        "primary-fixed": "#f8d8ff",
+                        "on-tertiary": "#690003",
+                        "on-secondary-fixed-variant": "#004f53",
+                        "on-tertiary-container": "#140000",
+                        "surface-container-low": "#1c1b1b",
+                        "outline": "#9d8ba0",
+                        "tertiary-container": "#e62721",
+                        "primary-fixed-dim": "#ebb2ff",
+                        "on-tertiary-fixed-variant": "#930005",
+                        "outline-variant": "#504254",
+                        "inverse-primary": "#9800d0",
+                        "on-secondary-container": "#006a6f",
+                        "on-primary-container": "#ffffff",
+                        "surface-tint": "#ebb2ff",
+                        "on-primary-fixed-variant": "#74009f",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-bright": "#3a3939",
+                        "on-primary-fixed": "#320047",
+                        "on-secondary-fixed": "#002022",
+                        "primary-container": "#bc13fe",
+                        "surface": "#131313",
+                        "secondary": "#dcfdff",
+                        "primary": "#ebb2ff",
+                        "secondary-container": "#00f1fd",
+                        "tertiary": "#ffb4aa",
+                        "surface-variant": "#353534",
+                        "background": "#131313",
+                        "on-background": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "40px",
+                        "unit": "4px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin": "20px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen antialiased selection:bg-primary/30 pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-lg border-b border-white/10 shadow-none transition-transform duration-150 flex justify-between items-center px-margin h-16 w-full">
+<!-- Leading Icon -->
+<button class="text-primary hover:opacity-80 transition-opacity flex items-center justify-center p-sm -ml-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<!-- Headline -->
+<h1 class="font-display-lg text-display-lg tracking-tighter text-primary truncate px-sm">VIBE CHECK</h1>
+<!-- Trailing Action -->
+<button class="bg-tertiary-container text-white px-md py-sm rounded-lg font-label-caps text-label-caps hover:opacity-80 transition-opacity shadow-[0_0_15px_rgba(230,39,33,0.4)] whitespace-nowrap">
+            PANIC EXIT
+        </button>
+</header>
+<main class="mt-16 w-full max-w-2xl mx-auto">
+<!-- Hero Section -->
+<div class="relative w-full h-[320px] mb-lg overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105" data-alt="A moody, atmospheric interior shot of an exclusive underground nightclub setting. The scene is bathed in low-key lighting with striking accents of neon purple and cyan cutting through the darkness. Sleek, minimalist furniture and reflective glass surfaces create a sense of depth and mystery. The aesthetic aligns with a sophisticated, high-energy dark mode UI style, evoking feelings of exclusivity and nightlife discovery." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCrK5hetPsJaV52qkOyAQl_dfQSzPeC-bW10elSfkb3lx4xa2QjbvStZye-iefgGXXW6HOlN9Z6Wi53IHYB1LqaC_ouvhna92BdTGU_EPrJ4_ognquF9aJmO9gw9K_wQykSRNu_Hn-Bte3mhVTv8xe1VhuZyGCpNsrLqmkaRKHdIOQ_FEqZ1MLcXGc0FNbOObZt3xjFPL-6AaojWI8_g9TWw-1JjP0oq0ZrweVK-iFgHBLFDLmA3KIoyBbupv0ZeWss1mdskPggF-E')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full px-margin pb-md">
+<div class="flex items-center gap-sm mb-xs">
+<span class="w-3 h-3 rounded-full bg-secondary-container shadow-[0_0_12px_rgba(0,241,253,0.8)] animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-secondary-container tracking-widest">LIVE NOW</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-xs">The Neon Lounge</h2>
+<div class="flex gap-sm flex-wrap">
+<span class="px-sm py-xs rounded border border-outline/50 bg-surface/50 backdrop-blur font-label-caps text-label-caps text-on-surface-variant">UNDERGROUND</span>
+<span class="px-sm py-xs rounded border border-outline/50 bg-surface/50 backdrop-blur font-label-caps text-label-caps text-on-surface-variant">TECHNO</span>
+</div>
+</div>
+</div>
+<div class="px-margin">
+<!-- Demographics Analytics (Bento Grid) -->
+<section class="mb-xl">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Real-Time Vibe</h3>
+<div class="grid grid-cols-2 gap-gutter">
+<!-- Density Card -->
+<div class="bg-surface-container/80 backdrop-blur-md border border-white/10 rounded-xl p-md flex flex-col justify-between aspect-square">
+<div class="flex justify-between items-start">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant">Capacity</h4>
+<span class="material-symbols-outlined text-outline">group</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-primary">82<span class="text-headline-md">%</span></div>
+<div class="w-full bg-surface-bright h-2 mt-sm rounded-full overflow-hidden shadow-inner">
+<div class="bg-gradient-to-r from-primary to-primary-fixed-dim h-full w-[82%] shadow-[0_0_8px_rgba(235,178,255,0.5)] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Energy Mix Card -->
+<div class="bg-surface-container/80 backdrop-blur-md border border-white/10 rounded-xl p-md flex flex-col justify-between aspect-square">
+<div class="flex justify-between items-start">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant">Energy Mix</h4>
+<span class="material-symbols-outlined text-outline">equalizer</span>
+</div>
+<div class="flex items-end h-24 gap-unit w-full pb-xs">
+<div class="w-1/3 flex flex-col items-center gap-xs">
+<div class="bg-primary-container w-full rounded-t-md h-[70%] shadow-[0_0_12px_rgba(188,19,254,0.3)]"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">HIGH</span>
+</div>
+<div class="w-1/3 flex flex-col items-center gap-xs">
+<div class="bg-secondary-container w-full rounded-t-md h-[40%] shadow-[0_0_12px_rgba(0,241,253,0.3)] opacity-80"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">MED</span>
+</div>
+<div class="w-1/3 flex flex-col items-center gap-xs">
+<div class="bg-surface-bright w-full rounded-t-md h-[20%]"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">LOW</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Profiles Section -->
+<section class="mb-xl">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">In The Room</h3>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-bright px-sm py-xs rounded-full">142 ACTIVE</span>
+</div>
+<!-- Filters -->
+<div class="flex gap-sm overflow-x-auto pb-sm mb-md hide-scrollbar w-[calc(100%+20px)] -mx-margin px-margin">
+<button class="px-md py-sm rounded-full border border-primary text-primary-container font-label-caps text-label-caps bg-primary/10 shadow-[0_0_12px_rgba(188,19,254,0.2)] whitespace-nowrap">ALL PROFILES</button>
+<button class="px-md py-sm rounded-full border border-outline-variant text-on-surface-variant font-label-caps text-label-caps hover:bg-white/5 transition-colors whitespace-nowrap">DANCING</button>
+<button class="px-md py-sm rounded-full border border-outline-variant text-on-surface-variant font-label-caps text-label-caps hover:bg-white/5 transition-colors whitespace-nowrap">MINGLING</button>
+</div>
+<!-- Profile List -->
+<div class="flex flex-col gap-sm">
+<!-- Profile Item 1 -->
+<div class="flex items-center justify-between p-md bg-surface-container/50 backdrop-blur-md border border-white/5 rounded-xl hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full bg-gradient-to-br from-primary via-[#8a2be2] to-secondary-container opacity-90 p-[2px]">
+<div class="w-full h-full rounded-full bg-surface-dim backdrop-blur-xl flex items-center justify-center mix-blend-screen">
+<div class="w-8 h-8 rounded-full bg-primary/40 blur-[4px]"></div>
+</div>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface font-semibold tracking-wide">ANON_8X29</div>
+<div class="font-body-md text-body-md text-secondary-fixed-dim text-sm mt-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">graphic_eq</span>
+                                    Matching Vibe
+                                </div><div class="font-body-md text-body-md text-on-surface-variant/70 text-[12px] mt-0.5 flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">bolt</span>3 Shared Interests</div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-sm rounded-full bg-surface-bright/50 border border-white/10 group-hover:border-primary/50 group-hover:shadow-[0_0_12px_rgba(188,19,254,0.3)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+</div>
+<!-- Profile Item 2 -->
+<div class="flex items-center justify-between p-md bg-surface-container/50 backdrop-blur-md border border-white/5 rounded-xl hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full bg-gradient-to-tr from-secondary-container via-surface to-primary/50 opacity-80 p-[2px]">
+<div class="w-full h-full rounded-full bg-surface-dim backdrop-blur-xl flex items-center justify-center mix-blend-screen">
+<div class="w-6 h-6 rounded-none rotate-45 bg-secondary-container/40 blur-[3px]"></div>
+</div>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface font-semibold tracking-wide">ANON_J492</div>
+<div class="font-body-md text-body-md text-on-surface-variant/70 text-[12px] mt-0.5 flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">groups</span>Both like Techno</div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-sm rounded-full bg-surface-bright/50 border border-white/10 group-hover:border-primary/50 group-hover:shadow-[0_0_12px_rgba(188,19,254,0.3)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+</div>
+<!-- Profile Item 3 -->
+<div class="flex items-center justify-between p-md bg-surface-container/50 backdrop-blur-md border border-white/5 rounded-xl hover:bg-white/5 transition-colors group">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full bg-gradient-to-b from-outline via-surface to-outline-variant opacity-70 p-[2px]">
+<div class="w-full h-full rounded-full bg-surface-dim backdrop-blur-xl flex items-center justify-center mix-blend-screen">
+<div class="w-10 h-2 rounded-full bg-outline/40 blur-[2px]"></div>
+</div>
+</div>
+<div>
+<div class="font-body-lg text-body-lg text-on-surface font-semibold tracking-wide">ANON_M100</div>
+<div class="font-body-md text-body-md text-on-surface-variant/70 text-[12px] mt-0.5 flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">favorite</span>2 Shared Vibes</div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-sm rounded-full bg-surface-bright/50 border border-white/10 group-hover:border-primary/50 group-hover:shadow-[0_0_12px_rgba(188,19,254,0.3)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Persistent Global Chat Action -->
+
+
+
+</body></html>

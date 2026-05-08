@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Venue Management - Nightwatch OS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;800&amp;family=Inter:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#930005",
+                        "primary-container": "#bc13fe",
+                        "on-tertiary-fixed": "#410001",
+                        "on-secondary-fixed": "#002022",
+                        "inverse-on-surface": "#313030",
+                        "surface-variant": "#353534",
+                        "outline": "#9d8ba0",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary": "#520072",
+                        "primary-fixed": "#f8d8ff",
+                        "on-background": "#e5e2e1",
+                        "on-error": "#690005",
+                        "surface-dim": "#131313",
+                        "on-secondary-fixed-variant": "#004f53",
+                        "on-secondary-container": "#006a6f",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffb4aa",
+                        "on-secondary": "#00373a",
+                        "background": "#131313",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed-dim": "#ffb4aa",
+                        "tertiary-fixed": "#ffdad5",
+                        "outline-variant": "#504254",
+                        "tertiary-container": "#e62721",
+                        "secondary-fixed-dim": "#00dce6",
+                        "on-tertiary": "#690003",
+                        "surface-tint": "#ebb2ff",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-fixed-dim": "#ebb2ff",
+                        "surface-bright": "#3a3939",
+                        "primary": "#ebb2ff",
+                        "surface": "#131313",
+                        "secondary-container": "#00f1fd",
+                        "on-surface-variant": "#d4c0d7",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-fixed-variant": "#74009f",
+                        "inverse-primary": "#9800d0",
+                        "on-primary-fixed": "#320047",
+                        "on-tertiary-container": "#140000",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-highest": "#353534",
+                        "secondary": "#dcfdff",
+                        "secondary-fixed": "#6ff6ff",
+                        "on-primary-container": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "md": "16px",
+                        "margin": "20px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "40px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": [
+                            "Hanken Grotesk"
+                        ],
+                        "label-caps": [
+                            "JetBrains Mono"
+                        ],
+                        "display-lg": [
+                            "Hanken Grotesk"
+                        ],
+                        "body-md": [
+                            "Inter"
+                        ],
+                        "body-lg": [
+                            "Inter"
+                        ]
+                    },
+                    "fontSize": {
+                        "headline-md": [
+                            "24px",
+                            {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                            }
+                        ],
+                        "label-caps": [
+                            "12px",
+                            {
+                                "lineHeight": "1.0",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "500"
+                            }
+                        ],
+                        "display-lg": [
+                            "40px",
+                            {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                            }
+                        ],
+                        "body-md": [
+                            "16px",
+                            {
+                                "lineHeight": "1.5",
+                                "letterSpacing": "0em",
+                                "fontWeight": "400"
+                            }
+                        ],
+                        "body-lg": [
+                            "18px",
+                            {
+                                "lineHeight": "1.5",
+                                "letterSpacing": "0em",
+                                "fontWeight": "400"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(16px);
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-live {
+            box-shadow: 0 0 12px rgba(235, 178, 255, 0.5); /* primary */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest text-primary font-body-md h-screen w-64 fixed left-0 top-0 border-r border-outline-variant/30 hidden md:flex flex-col h-full py-lg px-md z-50">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Nightlife Admin</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-xs">Super Admin</p>
+</div>
+<div class="flex flex-col gap-sm flex-1">
+<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-95 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">sensors</span>
+<span>Live Dashboard</span>
+</a>
+<a class="flex items-center gap-md bg-primary-container text-on-primary-container rounded-lg px-md py-sm hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">night_shelter</span>
+<span>Venue Management</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-95 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span>Moderation Queue</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-95 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>User Management</span>
+</a>
+</div>
+<div class="mt-auto">
+<button class="w-full flex items-center justify-center gap-sm bg-surface-container-high hover:bg-surface-variant text-on-surface py-sm rounded-lg border border-outline-variant/30 transition-colors mb-lg font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px]">health_and_safety</span>
+                System Status
+            </button>
+<div class="flex flex-col gap-xs pt-md border-t border-outline-variant/30">
+<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-95 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant hover:text-on-surface px-md py-sm hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-95 duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="bg-surface/80 backdrop-blur-xl text-primary font-label-caps fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] z-40 border-b border-outline-variant/20 shadow-sm flex justify-between items-center h-16 px-xl transition-all duration-300">
+<div class="font-headline-md text-headline-md tracking-tighter text-primary">
+            Nightwatch OS
+        </div>
+<div class="flex items-center gap-lg">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-high border border-outline-variant/30 rounded-full py-1 pl-10 pr-4 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 placeholder-on-surface-variant/50 font-body-md text-body-md h-9" placeholder="Search venues..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container overflow-hidden border border-primary/30 flex items-center justify-center">
+<img alt="Admin User" class="w-full h-full object-cover" data-alt="A macro shot of a textured, abstract dark geometric pattern with vibrant magenta and purple neon glowing edges. The aesthetic is sleek, minimalist, and highly modern, reflecting a premium dark mode UI theme. Soft blurred background elements create a sense of deep space and exclusivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeblJDwQ6Z-gKb_tVrTNx5F6tx5gHDIGJKLa4gyxE9l3f_F5g9eqY9QMHK8RpL1fH669v9ClQ-zkKhRSRw4AraWtiZVoT_M0BT_we3fP8E-jqepFNSNqIUsfIjSqlyhweRLTscQ37VMhiCmQz6amayMRYPqWegLdTVOZOvvejdnaZYMshUukgGn4FFDW_nk0NEdpCs8JqnO0YNhZAchXCxy2aFF9OzP2SQgDwqiKy1o-s30QUU2vIGa143WljzZc60QDJvwFY78xw"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 pt-24 px-margin pb-32 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-lg gap-md">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-xs">Venues</h2>
+<p class="text-on-surface-variant font-body-lg text-body-lg">Manage partner locations and monitor real-time capacity.</p>
+</div>
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-md py-sm rounded-full flex items-center gap-xs hover:bg-surface-tint transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+                Add New Venue
+            </button>
+</div>
+<!-- Filters & Search Bar (Mobile Fallback) -->
+<div class="glass-card rounded-xl p-md mb-lg flex flex-col md:flex-row gap-md items-center justify-between">
+<div class="w-full md:w-auto flex gap-sm overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
+<button class="border border-outline-variant text-on-surface font-label-caps text-label-caps px-md py-xs rounded-full hover:border-primary hover:text-primary whitespace-nowrap transition-colors bg-surface-container-high/50">All Venues</button>
+<button class="border border-primary text-primary font-label-caps text-label-caps px-md py-xs rounded-full bg-primary/10 whitespace-nowrap">Active</button>
+<button class="border border-outline-variant text-on-surface font-label-caps text-label-caps px-md py-xs rounded-full hover:border-primary hover:text-primary whitespace-nowrap transition-colors bg-surface-container-high/50">Inactive</button>
+<button class="border border-outline-variant text-on-surface font-label-caps text-label-caps px-md py-xs rounded-full hover:border-primary hover:text-primary whitespace-nowrap transition-colors bg-surface-container-high/50 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">filter_list</span> Filter
+                </button>
+</div>
+<div class="relative w-full md:w-72 sm:hidden">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container border border-outline-variant/30 rounded-full py-2 pl-10 pr-4 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-full placeholder-on-surface-variant/50 font-body-md text-body-md" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Bento Grid / Cards for Venues (High-end UI instead of basic table) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-gutter">
+<!-- Venue Card 1 -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group relative">
+<div class="absolute top-sm right-sm z-10 flex gap-xs">
+<span class="bg-surface-container-highest/80 backdrop-blur-md border border-outline-variant/30 text-on-surface font-label-caps text-[10px] px-2 py-1 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary glow-live animate-pulse"></span> Active
+                    </span>
+</div>
+<div class="h-32 bg-surface-container-highest relative overflow-hidden">
+<img alt="Venue Cover" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" data-alt="A moody, low-light interior shot of a sophisticated modern nightclub. Dimly lit with sleek architectural lines, accented by striking neon purple and cyan LED strip lighting. The atmosphere is exclusive, mysterious, and high-energy, perfectly capturing the dark mode, sleek minimalist aesthetic of a premium nightlife discovery platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8PorSPI0QvUlCJWjBbTvIeJg2Lip4mhxlGE4QZ5Bq9Qj0qL0JCT6UbzQP-x7UDB3fRuHQTdQFFRMH03LwzNDRwQCXH4FYTRGi07mtur9VZzDtca728EDSsfHYOYAUT6t3iYQgCzTm5Ku_eRRK5GJJLgkPbn5XqscYtkT__HU09I4kS6sw99liVyFSk7lgnNtS3hG8Ml-DsDRCuVLvCm3lkgNlM4zT7dE8-SsCWuJ0l_Nda-YCN6s_hWOayV7j1F3_QU6nBKQ95wM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent"></div>
+<div class="absolute bottom-md left-md right-md">
+<h3 class="font-headline-md text-headline-md text-on-surface truncate">The Neon Room</h3>
+<p class="text-on-surface-variant font-label-caps text-label-caps flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Downtown District
+                        </p>
+</div>
+</div>
+<div class="p-md flex-1 flex flex-col gap-md border-t border-outline-variant/10">
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20">
+<p class="text-on-surface-variant font-label-caps text-[10px] mb-1">GEO-RADIUS</p>
+<p class="font-body-md text-body-md text-on-surface">500m</p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/5"></div>
+<p class="text-on-surface-variant font-label-caps text-[10px] mb-1">ACTIVE COUNT</p>
+<p class="font-headline-md text-[20px] text-primary">342<span class="text-on-surface-variant text-[14px] font-body-md font-normal ml-1">/ 500</span></p>
+</div>
+</div>
+<div class="mt-auto pt-sm flex gap-sm border-t border-outline-variant/10">
+<button class="flex-1 bg-surface-container hover:bg-surface-variant text-on-surface font-label-caps text-label-caps py-2 rounded-lg border border-outline-variant/30 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">edit</span> Edit
+                        </button>
+<button class="flex-1 bg-surface-container hover:bg-surface-variant text-on-surface font-label-caps text-label-caps py-2 rounded-lg border border-outline-variant/30 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">qr_code_2</span> Generate QR
+                        </button>
+<button class="w-10 flex items-center justify-center bg-error-container/10 hover:bg-error-container/20 text-error rounded-lg border border-error/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">block</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Venue Card 2 -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group relative">
+<div class="absolute top-sm right-sm z-10 flex gap-xs">
+<span class="bg-surface-container-highest/80 backdrop-blur-md border border-outline-variant/30 text-on-surface font-label-caps text-[10px] px-2 py-1 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary glow-live animate-pulse"></span> Active
+                    </span>
+</div>
+<div class="h-32 bg-surface-container-highest relative overflow-hidden">
+<div class="w-full h-full bg-gradient-to-br from-surface-container-high to-surface-container-lowest opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent"></div>
+<div class="absolute bottom-md left-md right-md">
+<h3 class="font-headline-md text-headline-md text-on-surface truncate">Echo Lounge</h3>
+<p class="text-on-surface-variant font-label-caps text-label-caps flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Westside
+                        </p>
+</div>
+</div>
+<div class="p-md flex-1 flex flex-col gap-md border-t border-outline-variant/10">
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20">
+<p class="text-on-surface-variant font-label-caps text-[10px] mb-1">GEO-RADIUS</p>
+<p class="font-body-md text-body-md text-on-surface">250m</p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20 relative overflow-hidden">
+<div class="absolute inset-0 bg-secondary-container/5"></div>
+<p class="text-on-surface-variant font-label-caps text-[10px] mb-1">ACTIVE COUNT</p>
+<p class="font-headline-md text-[20px] text-secondary">128<span class="text-on-surface-variant text-[14px] font-body-md font-normal ml-1">/ 200</span></p>
+</div>
+</div>
+<div class="mt-auto pt-sm flex gap-sm border-t border-outline-variant/10">
+<button class="flex-1 bg-surface-container hover:bg-surface-variant text-on-surface font-label-caps text-label-caps py-2 rounded-lg border border-outline-variant/30 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">edit</span> Edit
+                        </button>
+<button class="flex-1 bg-surface-container hover:bg-surface-variant text-on-surface font-label-caps text-label-caps py-2 rounded-lg border border-outline-variant/30 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">qr_code_2</span> Generate QR
+                        </button>
+<button class="w-10 flex items-center justify-center bg-error-container/10 hover:bg-error-container/20 text-error rounded-lg border border-error/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">block</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Venue Card 3 (Inactive) -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group relative opacity-75">
+<div class="absolute top-sm right-sm z-10 flex gap-xs">
+<span class="bg-surface-container-highest/80 backdrop-blur-md border border-outline-variant/30 text-on-surface-variant font-label-caps text-[10px] px-2 py-1 rounded-full flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Inactive
+                    </span>
+</div>
+<div class="h-32 bg-surface-container-highest relative overflow-hidden grayscale">
+<img alt="Venue Cover" class="w-full h-full object-cover opacity-40" data-alt="A dark, empty modern cocktail bar interior shot in low key lighting. The space feels inactive and quiet. The color palette is muted with deep blacks, grays, and faint, cold white highlights reflecting off glass surfaces. The aesthetic aligns with a sleek, minimalist dark mode UI design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8QOIUVFfOpLCK-8-PjA_5Q2TWYJqbAS83ezQtZBvSJL76K8YDnNuaaxeXGGVArpofkdvayTauGD3m5iCrjAj8XM9umGd_Kw9tH4xTtQYqVfluMeuVOduijve0HG-gEMjNkEQhA3L-wrfSwZskfgXnud3CgHskbsqoAm4oTZ2_wQOtOdDU2VjEfQ7ec52u-47jAaWTxZZ6XTO95a0HeejMbdr21KWEtcyLoVVe_tXXZw8nH65kw2p6GgF2cCwm-iL3IdzRNZME17E"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent"></div>
+<div class="absolute bottom-md left-md right-md">
+<h3 class="font-headline-md text-headline-md text-on-surface-variant truncate">Vault 44</h3>
+<p class="text-on-surface-variant/70 font-label-caps text-label-caps flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Industrial Park
+                        </p>
+</div>
+</div>
+<div class="p-md flex-1 flex flex-col gap-md border-t border-outline-variant/10">
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20">
+<p class="text-on-surface-variant font-label-caps text-[10px] mb-1">GEO-RADIUS</p>
+<p class="font-body-md text-body-md text-on-surface-variant">1000m</p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant/20">
+<p class="text-on-surface-variant font-label-caps text-[10px] mb-1">ACTIVE COUNT</p>
+<p class="font-headline-md text-[20px] text-on-surface-variant">0<span class="text-outline/50 text-[14px] font-body-md font-normal ml-1">/ 800</span></p>
+</div>
+</div>
+<div class="mt-auto pt-sm flex gap-sm border-t border-outline-variant/10">
+<button class="flex-1 bg-surface-container hover:bg-surface-variant text-on-surface font-label-caps text-label-caps py-2 rounded-lg border border-outline-variant/30 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">edit</span> Edit
+                        </button>
+<button class="flex-1 bg-surface-container hover:bg-surface-variant text-on-surface-variant font-label-caps text-label-caps py-2 rounded-lg border border-outline-variant/30 transition-colors flex items-center justify-center gap-xs cursor-not-allowed opacity-50">
+<span class="material-symbols-outlined text-[16px]">qr_code_2</span> Generate QR
+                        </button>
+<button class="w-10 flex items-center justify-center bg-primary/10 hover:bg-primary/20 text-primary rounded-lg border border-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
