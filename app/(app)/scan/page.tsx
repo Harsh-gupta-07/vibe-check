@@ -1,9 +1,20 @@
 // Screen 3b: QR Scanner
 "use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import BottomNav from "@/app/components/BottomNav";
 import PanicButton from "@/app/components/PanicButton";
 
 export default function ScanPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push("/map");
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [router]);
+
   return (
     <div
       className="flex flex-col flex-1 h-full relative overflow-hidden"
@@ -14,7 +25,8 @@ export default function ScanPage() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "radial-gradient(ellipse at center, transparent 20%, rgba(19,19,19,0.6) 60%, rgba(19,19,19,0.95) 100%)",
+            backgroundImage:
+              "radial-gradient(ellipse at center, transparent 20%, rgba(19,19,19,0.6) 60%, rgba(19,19,19,0.95) 100%)",
           }}
         />
         {/* Grid pattern to simulate camera feed */}
@@ -74,10 +86,18 @@ export default function ScanPage() {
                 bottom: corner.startsWith("b") ? 0 : undefined,
                 left: corner.endsWith("l") ? 0 : undefined,
                 right: corner.endsWith("r") ? 0 : undefined,
-                borderTop: corner.startsWith("t") ? "3px solid var(--secondary-container)" : undefined,
-                borderBottom: corner.startsWith("b") ? "3px solid var(--secondary-container)" : undefined,
-                borderLeft: corner.endsWith("l") ? "3px solid var(--secondary-container)" : undefined,
-                borderRight: corner.endsWith("r") ? "3px solid var(--secondary-container)" : undefined,
+                borderTop: corner.startsWith("t")
+                  ? "3px solid var(--secondary-container)"
+                  : undefined,
+                borderBottom: corner.startsWith("b")
+                  ? "3px solid var(--secondary-container)"
+                  : undefined,
+                borderLeft: corner.endsWith("l")
+                  ? "3px solid var(--secondary-container)"
+                  : undefined,
+                borderRight: corner.endsWith("r")
+                  ? "3px solid var(--secondary-container)"
+                  : undefined,
                 borderTopLeftRadius: corner === "tl" ? 12 : undefined,
                 borderTopRightRadius: corner === "tr" ? 12 : undefined,
                 borderBottomLeftRadius: corner === "bl" ? 12 : undefined,
@@ -108,15 +128,19 @@ export default function ScanPage() {
           {/* Scanning zone */}
           <div
             className="absolute inset-2 rounded-lg"
-            style={{ background: "rgba(0,241,253,0.05)", mixBlendMode: "screen" }}
+            style={{
+              background: "rgba(0,241,253,0.05)",
+              mixBlendMode: "screen",
+            }}
           />
           {/* Scanning line animation */}
           <div
             className="absolute left-2 right-2 h-0.5 rounded-full"
             style={{
-              background: "linear-gradient(to right, transparent, var(--secondary-container), transparent)",
+              background:
+                "linear-gradient(to right, transparent, var(--secondary-container), transparent)",
               boxShadow: "0 0 8px rgba(0,241,253,0.6)",
-              animation: "scan-line 2s ease-in-out infinite",
+              animation: "scan-line 4s ease-in-out infinite",
               top: "50%",
             }}
           />
@@ -154,26 +178,45 @@ export default function ScanPage() {
           >
             Scan the QR code at the venue entry
           </h2>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: "var(--on-surface-variant)" }}>
-            Position the code inside the frame to check in to the venue and access the live menu.
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 16,
+              color: "var(--on-surface-variant)",
+            }}
+          >
+            Position the code inside the frame to check in to the venue and
+            access the live menu.
           </p>
         </div>
 
-        {/* Manual Entry */}
-        <button
-          className="mt-8 flex items-center gap-2 px-6 py-3 rounded-full transition-colors hover:bg-white/5"
-          style={{
-            border: "1px solid var(--outline-variant)",
-            color: "var(--on-surface)",
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 12,
-            fontWeight: 500,
-            letterSpacing: "0.08em",
-          }}
-        >
-          <span className="material-symbols-outlined" style={{ fontSize: 16 }}>keyboard</span>
-          ENTER VENUE CODE MANUALLY
-        </button>
+        {/* Auto-redirect progress */}
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <p
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 11,
+              color: "var(--on-surface-variant)",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            Entering venue map…
+          </p>
+          <div
+            className="w-48 h-0.5 rounded-full overflow-hidden"
+            style={{ background: "rgba(255,255,255,0.1)" }}
+          >
+            <div
+              className="h-full rounded-full"
+              style={{
+                background:
+                  "linear-gradient(to right, var(--primary), var(--secondary-container))",
+                animation: "fill-bar 1s linear forwards",
+              }}
+            />
+          </div>
+        </div>
       </main>
 
       <BottomNav />
@@ -183,6 +226,10 @@ export default function ScanPage() {
           0% { top: 10%; }
           50% { top: 90%; }
           100% { top: 10%; }
+        }
+        @keyframes fill-bar {
+          from { width: 0%; }
+          to { width: 100%; }
         }
       `}</style>
     </div>

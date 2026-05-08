@@ -244,7 +244,7 @@ export default function OnboardingPage() {
 
           {/* CTA */}
           <button
-            onClick={() => router.push("/map")}
+            onClick={() => router.push("/scan")}
             disabled={!isValid}
             className="w-full py-4 mt-2 flex items-center justify-center gap-2 rounded-lg transition-colors hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
