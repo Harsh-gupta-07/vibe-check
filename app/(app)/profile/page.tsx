@@ -13,10 +13,10 @@ const VENUE_HISTORY = [
 
 export default function ProfilePage() {
   return (
-    <div className="min-h-dvh" style={{ background: "#131313" }}>
+    <div className="flex flex-col flex-1 h-full overflow-hidden" style={{ background: "#131313" }}>
       {/* TopAppBar */}
       <header
-        className="sticky top-0 w-full z-50 flex justify-between items-center px-5 shrink-0"
+        className="w-full z-50 flex justify-between items-center px-5 shrink-0"
         style={{
           height: 56,
           background: "rgba(19,19,19,0.9)",
@@ -38,8 +38,8 @@ export default function ProfilePage() {
       </header>
 
       <main
-        className="pt-4 px-5 max-w-2xl mx-auto space-y-6"
-        style={{ paddingBottom: 100 }}
+        className="flex-1 overflow-y-auto pt-4 px-5 max-w-2xl mx-auto space-y-6"
+        style={{ paddingBottom: 24, scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {/* Profile Card */}
         <section

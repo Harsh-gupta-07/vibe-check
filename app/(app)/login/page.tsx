@@ -10,7 +10,7 @@ export default function LoginPage() {
 
   return (
     <div
-      className="min-h-dvh relative overflow-hidden flex flex-col items-center justify-center"
+      className="h-full relative overflow-hidden flex flex-col items-center justify-center"
       style={{ background: "#131313" }}
     >
       {/* Ambient Background */}
@@ -24,12 +24,18 @@ export default function LoginPage() {
         />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, #131313 0%, rgba(19,19,19,0.7) 60%, rgba(19,19,19,0.4) 100%)" }}
+          style={{
+            background:
+              "linear-gradient(to top, #131313 0%, rgba(19,19,19,0.7) 60%, rgba(19,19,19,0.4) 100%)",
+          }}
         />
       </div>
 
       {/* Content */}
-      <main className="w-full max-w-md px-5 relative z-10 flex flex-col items-center page-enter" style={{ paddingTop: 60, paddingBottom: 40 }}>
+      <main
+        className="w-full max-w-md px-5 relative z-10 flex flex-col items-center page-enter"
+        style={{ paddingTop: 60, paddingBottom: 40 }}
+      >
         {/* Brand */}
         <div className="mb-10 text-center">
           <h1
@@ -60,7 +66,10 @@ export default function LoginPage() {
           {/* Toggle */}
           <div
             className="flex p-1"
-            style={{ background: "var(--surface-container-highest)", borderRadius: 9999 }}
+            style={{
+              background: "var(--surface-container-highest)",
+              borderRadius: 9999,
+            }}
           >
             {(["join", "login"] as const).map((t) => (
               <button
@@ -69,12 +78,17 @@ export default function LoginPage() {
                 className="flex-1 py-2 px-4 transition-all"
                 style={{
                   borderRadius: 9999,
-                  background: tab === t ? "var(--primary-container)" : "transparent",
-                  color: tab === t ? "var(--on-primary-container)" : "var(--on-surface-variant)",
+                  background:
+                    tab === t ? "var(--primary-container)" : "transparent",
+                  color:
+                    tab === t
+                      ? "var(--on-primary-container)"
+                      : "var(--on-surface-variant)",
                   fontFamily: "'Hanken Grotesk', sans-serif",
                   fontSize: 18,
                   fontWeight: 600,
-                  boxShadow: tab === t ? "0 0 12px rgba(188,19,254,0.3)" : undefined,
+                  boxShadow:
+                    tab === t ? "0 0 12px rgba(188,19,254,0.3)" : undefined,
                 }}
               >
                 {t === "join" ? "Join" : "Log In"}
@@ -86,7 +100,11 @@ export default function LoginPage() {
           <div className="flex flex-col gap-2">
             <label
               className="font-label uppercase tracking-widest pl-1"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--on-surface-variant)" }}
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 12,
+                color: "var(--on-surface-variant)",
+              }}
             >
               Phone Number
             </label>
@@ -111,7 +129,10 @@ export default function LoginPage() {
                 }}
               >
                 +1
-                <span className="material-symbols-outlined" style={{ fontSize: 20, color: "var(--on-surface-variant)" }}>
+                <span
+                  className="material-symbols-outlined"
+                  style={{ fontSize: 20, color: "var(--on-surface-variant)" }}
+                >
                   arrow_drop_down
                 </span>
               </button>
@@ -119,7 +140,11 @@ export default function LoginPage() {
                 className="flex-1 bg-transparent border-none outline-none px-4 py-3"
                 placeholder="(555) 000-0000"
                 type="tel"
-                style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: "var(--on-surface)" }}
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 16,
+                  color: "var(--on-surface)",
+                }}
               />
             </div>
           </div>
@@ -142,14 +167,24 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="flex items-center gap-4 py-1">
-            <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
+            <div
+              className="flex-1 h-px"
+              style={{ background: "rgba(255,255,255,0.1)" }}
+            />
             <span
               className="font-label uppercase"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--on-surface-variant)" }}
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 12,
+                color: "var(--on-surface-variant)",
+              }}
             >
               Or
             </span>
-            <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
+            <div
+              className="flex-1 h-px"
+              style={{ background: "rgba(255,255,255,0.1)" }}
+            />
           </div>
 
           {/* Social Logins */}
@@ -160,6 +195,7 @@ export default function LoginPage() {
             ].map((btn) => (
               <button
                 key={btn.label}
+                onClick={() => router.push("/onboarding")}
                 className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg transition-colors hover:bg-white/5"
                 style={{
                   border: "1px solid var(--outline-variant)",

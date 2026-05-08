@@ -35,11 +35,11 @@ export default function ChatPage() {
 
   return (
     /* Outer column: header + chat area + input bar + nav */
-    <div className="flex flex-col" style={{ background: "#131313", minHeight: "100%" }}>
+    <div className="flex flex-col flex-1 h-full overflow-hidden" style={{ background: "#131313" }}>
 
       {/* ── Top App Bar ─────────────────────────────────────── */}
       <header
-        className="sticky top-0 w-full z-50 flex justify-between items-center px-4 shrink-0"
+        className="w-full z-50 flex justify-between items-center px-4 shrink-0"
         style={{
           height: 56,
           background: "rgba(19,19,19,0.9)",
@@ -216,7 +216,7 @@ export default function ChatPage() {
 
       {/* ── Message Input (sticky at bottom of scroll area) ─── */}
       <div
-        className="sticky bottom-0 w-full px-4 py-2 shrink-0"
+        className="w-full px-4 py-2 shrink-0"
         style={{
           background: "rgba(19,19,19,0.97)",
           backdropFilter: "blur(20px)",

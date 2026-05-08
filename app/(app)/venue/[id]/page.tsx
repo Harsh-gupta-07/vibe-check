@@ -18,10 +18,10 @@ export default function VenueDetailPage() {
   const [activeFilter, setActiveFilter] = useState("ALL PROFILES");
 
   return (
-    <div className="min-h-dvh" style={{ background: "#131313" }}>
+    <div className="flex flex-col flex-1 h-full overflow-hidden" style={{ background: "#131313" }}>
       {/* TopAppBar */}
       <header
-        className="sticky top-0 w-full z-50 flex justify-between items-center px-5 shrink-0"
+        className="w-full z-50 flex justify-between items-center px-5 shrink-0"
         style={{
           height: 56,
           background: "rgba(19,19,19,0.9)",
@@ -47,7 +47,7 @@ export default function VenueDetailPage() {
         <PanicButton small />
       </header>
 
-      <main className="pt-0 w-full max-w-2xl mx-auto pb-6">
+      <main className="flex-1 overflow-y-auto w-full max-w-2xl mx-auto pb-6" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
         {/* Hero Section */}
         <div className="relative w-full overflow-hidden" style={{ height: 320, marginBottom: 24 }}>
           <div

@@ -24,7 +24,10 @@ export default function WelcomePage() {
         />
         <div
           className="absolute inset-0 z-10"
-          style={{ background: "linear-gradient(to bottom, rgba(19,19,19,0.4) 0%, transparent 50%)" }}
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(19,19,19,0.4) 0%, transparent 50%)",
+          }}
         />
         {/* Dark nightclub ambient background */}
         <div
@@ -57,7 +60,11 @@ export default function WelcomePage() {
           >
             <span
               className="material-symbols-outlined"
-              style={{ fontSize: 40, color: "var(--primary)", fontVariationSettings: "'FILL' 1" }}
+              style={{
+                fontSize: 40,
+                color: "var(--primary)",
+                fontVariationSettings: "'FILL' 1",
+              }}
             >
               local_fire_department
             </span>
@@ -90,31 +97,33 @@ export default function WelcomePage() {
           </p>
 
           {/* Feature pills */}
-          <div className="flex gap-2 flex-wrap justify-center mt-2">
-            {["🔒 Anonymous", "📍 Live Venues", "💬 Real-time Chat"].map((f) => (
-              <span
-                key={f}
-                className="font-label"
-                style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 11,
-                  color: "var(--on-surface-variant)",
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  borderRadius: 9999,
-                  padding: "4px 12px",
-                  letterSpacing: "0.08em",
-                }}
-              >
-                {f}
-              </span>
-            ))}
+          <div className="flex gap-2 flex-wrap justify-center mt-2 mb-2">
+            {["🔒 Anonymous", "📍 Live Venues", "💬 Real-time Chat"].map(
+              (f) => (
+                <span
+                  key={f}
+                  className="font-label"
+                  style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 11,
+                    color: "var(--on-surface-variant)",
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: 9999,
+                    padding: "4px 12px",
+                    letterSpacing: "0.08em",
+                  }}
+                >
+                  {f}
+                </span>
+              ),
+            )}
           </div>
         </div>
 
         {/* Action Buttons */}
         <div className="w-full flex flex-col gap-3 mt-auto">
-          <Link href="/onboarding" className="block">
+          <Link href="/login" className="block">
             <button
               className="w-full py-4 rounded-lg font-headline transition-all hover:opacity-90 active:scale-[0.98]"
               style={{
@@ -129,24 +138,13 @@ export default function WelcomePage() {
               Get Started
             </button>
           </Link>
-          <Link href="/login" className="block">
-            <button
-              className="w-full py-4 rounded-lg font-headline transition-colors hover:bg-white/10 active:scale-[0.98]"
-              style={{
-                fontFamily: "'Hanken Grotesk', sans-serif",
-                fontSize: 20,
-                fontWeight: 600,
-                background: "rgba(32,31,31,0.8)",
-                color: "var(--on-surface)",
-                border: "1px solid rgba(255,255,255,0.1)",
-              }}
-            >
-              Sign In
-            </button>
-          </Link>
           <p
             className="text-center text-xs mt-2"
-            style={{ color: "var(--on-surface-variant)", opacity: 0.7, fontFamily: "'Inter', sans-serif" }}
+            style={{
+              color: "var(--on-surface-variant)",
+              opacity: 0.7,
+              fontFamily: "'Inter', sans-serif",
+            }}
           >
             18+ only · By continuing you agree to our Terms &amp; Privacy Policy
           </p>

@@ -185,7 +185,8 @@ export default function PhoneFrame({ children }: { children: ReactNode }) {
               overflowY: "auto",
               overflowX: "hidden",
               position: "relative",
-              /* push content down under dynamic island area */
+              display: "flex",
+              flexDirection: "column",
               scrollbarWidth: "none",
               msOverflowStyle: "none",
             }}

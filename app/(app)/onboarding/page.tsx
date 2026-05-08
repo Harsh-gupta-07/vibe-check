@@ -5,18 +5,39 @@ import { useRouter } from "next/navigation";
 
 export default function OnboardingPage() {
   const [showAgeGate, setShowAgeGate] = useState(true);
-  const [otp, setOtp] = useState(["8", "4", "", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [handle, setHandle] = useState("");
+  const [age, setAge] = useState("");
+  const [identity, setIdentity] = useState("");
   const router = useRouter();
 
   const handleOtp = (i: number, val: string) => {
+    const numVal = val.replace(/[^0-9]/g, "");
+    if (!numVal && val) return;
+
     const next = [...otp];
-    next[i] = val.slice(-1);
+    next[i] = numVal.slice(-1);
     setOtp(next);
+
+    if (numVal && i < 5) {
+      const nextInput = document.getElementById(`otp-${i + 1}`);
+      nextInput?.focus();
+    }
   };
+
+  const handleKeyDown = (i: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace" && !otp[i] && i > 0) {
+      const prevInput = document.getElementById(`otp-${i - 1}`);
+      prevInput?.focus();
+    }
+  };
+
+  const isOtpFilled = otp.every((v) => v.length > 0);
+  const isValid = isOtpFilled && handle.trim().length > 0 && age !== "" && identity !== "";
 
   return (
     <div
-      className="min-h-dvh flex items-center justify-center p-5 relative overflow-hidden"
+      className="h-full pt-20 relative overflow-hidden flex flex-col items-center justify-center"
       style={{ background: "#131313" }}
     >
       {/* Abstract Background */}
@@ -44,20 +65,29 @@ export default function OnboardingPage() {
           >
             VIBE CHECK
           </h1>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: "var(--on-surface-variant)" }}>
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 16,
+              color: "var(--on-surface-variant)",
+            }}
+          >
             Initialize your presence.
           </p>
         </div>
 
         {/* Setup Card */}
-        <div
-          className="glass-panel rounded-xl p-6 flex flex-col gap-6 shadow-2xl"
-        >
+        <div className="glass-panel rounded-xl p-6 flex flex-col gap-6 shadow-2xl">
           {/* OTP */}
           <div className="flex flex-col gap-2">
             <label
               className="uppercase"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--on-surface-variant)", letterSpacing: "0.1em" }}
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 12,
+                color: "var(--on-surface-variant)",
+                letterSpacing: "0.1em",
+              }}
             >
               Verify Identity
             </label>
@@ -65,29 +95,40 @@ export default function OnboardingPage() {
               {otp.map((v, i) => (
                 <input
                   key={i}
-                  className={`w-12 h-14 text-center rounded-lg input-dark transition-all ${i === 1 ? "glow-primary" : ""}`}
+                  id={`otp-${i}`}
+                  className="w-12 h-14 text-center rounded-lg input-dark transition-all"
                   style={{
                     fontFamily: "'Hanken Grotesk', sans-serif",
                     fontSize: 24,
                     fontWeight: 600,
-                    border: i === 1 ? "1px solid var(--primary)" : undefined,
                   }}
                   maxLength={1}
                   type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   value={v}
                   onChange={(e) => handleOtp(i, e.target.value)}
+                  onKeyDown={(e) => handleKeyDown(i, e)}
                 />
               ))}
             </div>
             <p
               className="text-right cursor-pointer hover:opacity-80"
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: "var(--secondary-container)", letterSpacing: "0.08em" }}
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 10,
+                color: "var(--secondary-container)",
+                letterSpacing: "0.08em",
+              }}
             >
               RESEND CODE
             </p>
           </div>
 
-          <div className="h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
+          <div
+            className="h-px"
+            style={{ background: "rgba(255,255,255,0.1)" }}
+          />
 
           {/* Profile Details */}
           <div className="flex flex-col gap-4">
@@ -95,15 +136,32 @@ export default function OnboardingPage() {
             <div className="flex flex-col gap-1">
               <label
                 className="flex justify-between items-end uppercase"
-                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--on-surface-variant)", letterSpacing: "0.1em" }}
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 12,
+                  color: "var(--on-surface-variant)",
+                  letterSpacing: "0.1em",
+                }}
               >
                 <span>Anonymous Handle</span>
-                <span style={{ fontSize: 10, color: "var(--primary)", opacity: 0.8 }}>REQUIRED</span>
+                <span
+                  style={{
+                    fontSize: 10,
+                    color: "var(--primary)",
+                    opacity: 0.8,
+                  }}
+                >
+                  REQUIRED
+                </span>
               </label>
               <div className="relative">
                 <span
                   className="absolute left-3 top-1/2 -translate-y-1/2"
-                  style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: "var(--on-surface-variant)" }}
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 16,
+                    color: "var(--on-surface-variant)",
+                  }}
                 >
                   @
                 </span>
@@ -111,6 +169,8 @@ export default function OnboardingPage() {
                   className="w-full pl-8 pr-3 py-3 rounded-lg input-dark"
                   placeholder="neon_ghost"
                   type="text"
+                  value={handle}
+                  onChange={(e) => setHandle(e.target.value)}
                   style={{ fontFamily: "'Inter', sans-serif", fontSize: 16 }}
                 />
               </div>
@@ -122,23 +182,43 @@ export default function OnboardingPage() {
                 {
                   label: "Age",
                   options: ["18 - 24", "25 - 34", "35 - 44", "45+"],
+                  value: age,
+                  setValue: setAge,
                 },
                 {
                   label: "Identity",
-                  options: ["Male", "Female", "Non-binary", "Other", "Prefer not to say"],
+                  options: [
+                    "Male",
+                    "Female",
+                    "Non-binary",
+                    "Other",
+                    "Prefer not to say",
+                  ],
+                  value: identity,
+                  setValue: setIdentity,
                 },
               ].map((field) => (
                 <div key={field.label} className="flex flex-col gap-1">
                   <label
                     className="uppercase"
-                    style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: "var(--on-surface-variant)", letterSpacing: "0.1em" }}
+                    style={{
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 12,
+                      color: "var(--on-surface-variant)",
+                      letterSpacing: "0.1em",
+                    }}
                   >
                     {field.label}
                   </label>
                   <div className="relative">
                     <select
+                      value={field.value}
+                      onChange={(e) => field.setValue(e.target.value)}
                       className="w-full px-3 py-3 rounded-lg input-dark appearance-none"
-                      style={{ fontFamily: "'Inter', sans-serif", fontSize: 16 }}
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: 16,
+                      }}
                     >
                       <option value="">Select</option>
                       {field.options.map((o) => (
@@ -149,7 +229,10 @@ export default function OnboardingPage() {
                     </select>
                     <span
                       className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
-                      style={{ fontSize: 20, color: "var(--on-surface-variant)" }}
+                      style={{
+                        fontSize: 20,
+                        color: "var(--on-surface-variant)",
+                      }}
                     >
                       expand_more
                     </span>
@@ -162,7 +245,8 @@ export default function OnboardingPage() {
           {/* CTA */}
           <button
             onClick={() => router.push("/map")}
-            className="w-full py-4 mt-2 flex items-center justify-center gap-2 rounded-lg transition-colors hover:opacity-80"
+            disabled={!isValid}
+            className="w-full py-4 mt-2 flex items-center justify-center gap-2 rounded-lg transition-colors hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               background: "rgba(235,178,255,0.2)",
               color: "var(--primary-fixed-dim)",
@@ -175,16 +259,19 @@ export default function OnboardingPage() {
             }}
           >
             <span>Enter Void</span>
-            <span className="material-symbols-outlined" style={{ fontSize: 16 }}>arrow_forward</span>
+            <span
+              className="material-symbols-outlined"
+              style={{ fontSize: 16 }}
+            >
+              arrow_forward
+            </span>
           </button>
         </div>
       </div>
 
       {/* 18+ Age Gate Overlay */}
       {showAgeGate && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-5 glass-overlay"
-        >
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-5 glass-overlay">
           <div
             className="flex flex-col items-center text-center p-6 w-full max-w-[340px] shadow-2xl"
             style={{
@@ -202,22 +289,37 @@ export default function OnboardingPage() {
             >
               <span
                 className="material-symbols-outlined"
-                style={{ fontSize: 32, color: "var(--error)", fontVariationSettings: "'FILL' 1" }}
+                style={{
+                  fontSize: 32,
+                  color: "var(--error)",
+                  fontVariationSettings: "'FILL' 1",
+                }}
               >
                 warning
               </span>
             </div>
             <h2
               className="mb-3"
-              style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: 24, fontWeight: 600, color: "var(--on-surface)" }}
+              style={{
+                fontFamily: "'Hanken Grotesk', sans-serif",
+                fontSize: 24,
+                fontWeight: 600,
+                color: "var(--on-surface)",
+              }}
             >
               Age Verification Required
             </h2>
             <p
               className="mb-6"
-              style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: "var(--on-surface-variant)", lineHeight: 1.5 }}
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 16,
+                color: "var(--on-surface-variant)",
+                lineHeight: 1.5,
+              }}
             >
-              VIBE CHECK is strictly for adults. You must be 18 years or older to enter. Falsifying your age will result in a permanent ban.
+              VIBE CHECK is strictly for adults. You must be 18 years or older
+              to enter. Falsifying your age will result in a permanent ban.
             </p>
             <div className="w-full flex flex-col gap-2">
               <button

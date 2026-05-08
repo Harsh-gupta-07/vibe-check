@@ -6,7 +6,7 @@ import PanicButton from "@/app/components/PanicButton";
 export default function ScanPage() {
   return (
     <div
-      className="min-h-dvh flex flex-col relative overflow-hidden"
+      className="flex flex-col flex-1 h-full relative overflow-hidden"
       style={{ background: "#131313" }}
     >
       {/* Simulated Camera Feed Background */}
@@ -29,7 +29,7 @@ export default function ScanPage() {
 
       {/* TopAppBar */}
       <header
-        className="sticky top-0 w-full z-50 flex justify-between items-center px-5 shrink-0"
+        className="w-full z-50 flex justify-between items-center px-5 shrink-0"
         style={{
           height: 56,
           background: "rgba(19,19,19,0.9)",

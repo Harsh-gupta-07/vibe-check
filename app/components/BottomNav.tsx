@@ -13,7 +13,7 @@ export default function BottomNav() {
   const pathname = usePathname();
   return (
     <nav
-      className="sticky bottom-0 w-full z-50 flex justify-around items-center h-16 px-4"
+      className="w-full z-50 flex justify-around items-center h-16 px-4 shrink-0"
       style={{
         background: "rgba(32,31,31,0.95)",
         backdropFilter: "blur(20px)",
