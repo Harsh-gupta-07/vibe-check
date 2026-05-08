@@ -13,7 +13,6 @@ export default function WelcomePage() {
       className="h-full relative overflow-hidden flex flex-col items-center justify-center"
       style={{ background: "#131313" }}
     >
-      {/* Background Image with gradient overlay */}
       <div className="absolute inset-0 z-0">
         <div
           className="absolute inset-0 z-10"
@@ -29,7 +28,6 @@ export default function WelcomePage() {
               "linear-gradient(to bottom, rgba(19,19,19,0.4) 0%, transparent 50%)",
           }}
         />
-        {/* Dark nightclub ambient background */}
         <div
           className="w-full h-full"
           style={{
@@ -39,17 +37,13 @@ export default function WelcomePage() {
         />
       </div>
 
-      {/* Content */}
       <main
         className="relative z-20 w-full max-w-md px-5 flex flex-col items-center justify-between page-enter"
         style={{ height: "100%", paddingBottom: 40, paddingTop: 60 }}
       >
-        {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Brand Identity */}
         <div className="flex flex-col items-center justify-center text-center flex-1 gap-4">
-          {/* Logo glow ring */}
           <div
             className="w-20 h-20 rounded-full flex items-center justify-center mb-2"
             style={{
@@ -96,7 +90,6 @@ export default function WelcomePage() {
             Discover the frequency. Maintain your privacy. Control the room.
           </p>
 
-          {/* Feature pills */}
           <div className="flex gap-2 flex-wrap justify-center mt-2 mb-2">
             {["🔒 Anonymous", "📍 Live Venues", "💬 Real-time Chat"].map(
               (f) => (
@@ -121,7 +114,6 @@ export default function WelcomePage() {
           </div>
         </div>
 
-        {/* Action Buttons */}
         <div className="w-full flex flex-col gap-3 mt-auto">
           <Link href="/login" className="block">
             <button
